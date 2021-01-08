@@ -4,7 +4,9 @@
 function getQuestions() {
     // alert("preguntas seleccionadas")
     const totalQuestions = document.getElementById("totalQuestions").value;
-    const url = `https://opentdb.com/api.php?amount=${totalQuestions}`;
+    const category = document.getElementById("select-category").value;
+    // https://opentdb.com/api.php?amount=10&category=25
+    const url = `https://opentdb.com/api.php?amount=${totalQuestions}&category=${category}`;
 
     fetch(url)
         .then((response) => response.json())
@@ -13,6 +15,7 @@ function getQuestions() {
 }
 
 function printData(data) {
+    console.log(data);
     //obtner los datos
     const containerData = document.getElementById("questions-container");
     //generar los datos

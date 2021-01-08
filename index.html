@@ -13,7 +13,7 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <form action="#">
+                        <form action="/validate" onsubmit="event.preventDefault(), getQuestions()">
                             <!-- NÚMERO DE PREGUNTAS -->
                             <label for="totalQuestions">Total Questions</label>
                             <select  class="form-select"  id="totalQuestions">
@@ -28,11 +28,7 @@
                             <label for="select-category">Categorie</label>
                             <select  class="form-select"  id="select-category">
                                 <!-- <option selected>Open this select menu</option> -->
-                                <option selected value="10">10</option>
-                                <option value="20">20</option>
-                                <option value="30">30</option>
-                                <option value="40">40</option>
-                                <option value="50">50</option>
+                                
                             </select>
                             <input type="submit" value="Obtener preguntas" class="btn btn-primary mt-5">
                         </form>
