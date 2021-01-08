@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Principal API</title>
+</head>
+<body>
+    <h1>Index</h1>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="#">
+                            <!-- NÚMERO DE PREGUNTAS -->
+                            <label for="totalQuestions">Total Questions</label>
+                            <select  class="form-select"  id="totalQuestions">
+                                <!-- <option selected>Open this select menu</option> -->
+                                <option selected value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="40">40</option>
+                                <option value="50">50</option>
+                            </select>
+                            <!-- CATEGORÍAS -->
+                            <label for="select-category">Categorie</label>
+                            <select  class="form-select"  id="select-category">
+                                <!-- <option selected>Open this select menu</option> -->
+                                <option selected value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="40">40</option>
+                                <option value="50">50</option>
+                            </select>
+                            <input type="submit" value="Obtener preguntas" class="btn btn-primary mt-5">
+                        </form>
+                    </div>  
+                </div>
+            </div>
+        </div>
+        <!-- <button class="btn btn-primary mt-5" onclick="getQuestions()">Mostara preguntas</button> -->
+        <div class="row" id="questions-container">
+            
+        </div>
+    </div>
+    <script src="js/api.js"></script>
+</body>
+</html>
