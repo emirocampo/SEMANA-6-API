@@ -32,14 +32,59 @@ function printData(data) {
     const containerData = document.getElementById("questions-container");
     //generar los datos
     let html = "";
+    let i = 1;
     data.forEach(element => {
+        let answerCorrert = "RESPUESTA CORRECT";
+        if (element.type === "multiple") {
+            answerCorrert = `<div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault${i}" id="flexRadioDefault${i}">
+                                <label class="form-check-label" for="flexRadioDefault${i}">
+                                ${element.correct_answer}
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault${i}" id="flexRadioDefault${i}">
+                                <label class="form-check-label" for="flexRadioDefault${i}">
+                                ${element.incorrect_answers[0]}
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault${i}" id="flexRadioDefault${i}">
+                                <label class="form-check-label" for="flexRadioDefault${i}">
+                                ${element.incorrect_answers[1]}
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault${i}" id="flexRadioDefault${i}">
+                                <label class="form-check-label" for="flexRadioDefault${i}">
+                                ${element.incorrect_answers[2]}
+                                </label>
+                            </div>`;            
+        }else {
+            answerCorrert = `<div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault${i}" id="flexRadioDefault${i}">
+                                <label class="form-check-label" for="flexRadioDefault${i}">
+                                ${element.correct_answer}
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault${i}" id="flexRadioDefault${i}">
+                                <label class="form-check-label" for="flexRadioDefault${i}">
+                                ${element.incorrect_answers[0]}
+                                </label>
+                            </div>`
+        }
         html += `<div class="col-md-4 mt-3">
                     <div class="card h-100">
                         <div class="card-body">
-                            ${element.question}
+                            <p>
+                                ${element.question}
+                            </p>
+                            ${answerCorrert}                            
                         </div>
                     </div>
                 </div>`;
+        i++;
     });
     //poner los datos en HTML
     containerData.innerHTML = html;
