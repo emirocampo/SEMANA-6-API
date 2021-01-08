@@ -2,12 +2,25 @@
 //======================== OBTENER PREGUNTAS ========================
 //===================================================================
 function getQuestions() {
-    // alert("preguntas seleccionadas")
+    
     const totalQuestions = document.getElementById("totalQuestions").value;
     const category = document.getElementById("select-category").value;
-    // https://opentdb.com/api.php?amount=10&category=25
-    const url = `https://opentdb.com/api.php?amount=${totalQuestions}&category=${category}`;
+    const difficulty = document.getElementById("select-difficulty").value;
+    const type = document.getElementById("select-question-type").value;
+    
+    let url = `https://opentdb.com/api.php?amount=${totalQuestions}`;
 
+    // si category==="8" quiere decir que no se escogió una categoría, las preguntas vienen variadas
+    if(category !="8"){
+        url += `&category=${category}`;
+    }
+    if(difficulty != "any"){
+        url += `&difficulty=${difficulty}`;
+    }
+    if(type != "any"){
+        url += `&type=${type}`;
+    }    
+    
     fetch(url)
         .then((response) => response.json())
         .then((data) => printData(data.results))
@@ -15,7 +28,6 @@ function getQuestions() {
 }
 
 function printData(data) {
-    console.log(data);
     //obtner los datos
     const containerData = document.getElementById("questions-container");
     //generar los datos
@@ -53,7 +65,7 @@ function getCategories() {
 function printCategories(data) {
     
     const categoriesConatiner = document.getElementById("select-category");
-    let html = "";
+    let html = `<option value="8">Any Category</option>`;
     data.forEach((element) => {
         html += `<option value="${element.id}">${element.name}</option>`
     })
