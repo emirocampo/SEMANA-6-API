@@ -23,54 +23,70 @@ function getQuestions() {
     
     fetch(url)
         .then((response) => response.json())
-        .then((data) => printData(data.results))
+        .then((data) => {
+            printData(data.results);
+            answerCorrert(data.results);
+        })
     
 }
 
 function printData(data) {
     //obtner los datos
     const containerData = document.getElementById("questions-container");
+    const containerBtn = document.getElementById("btn-send-answers");
     //generar los datos
     let html = "";
     let i = 1;
     data.forEach(element => {
-        let answerCorrert = "RESPUESTA CORRECT";
+        let answerBody = "RESPUESTA CORRECT";
         if (element.type === "multiple") {
-            answerCorrert = `<div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault${i}" id="flexRadioDefault${i}">
+            answerBody = `<div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault${i}" id="flexRadioDefault${i}0" value="${element.correct_answer}">
                                 <label class="form-check-label" for="flexRadioDefault${i}">
                                 ${element.correct_answer}
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault${i}" id="flexRadioDefault${i}">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault${i}" id="flexRadioDefault${i}1" value="${element.incorrect_answers[0]}">
                                 <label class="form-check-label" for="flexRadioDefault${i}">
                                 ${element.incorrect_answers[0]}
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault${i}" id="flexRadioDefault${i}">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault${i}" id="flexRadioDefault${i}2" value="${element.incorrect_answers[1]}">
                                 <label class="form-check-label" for="flexRadioDefault${i}">
                                 ${element.incorrect_answers[1]}
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault${i}" id="flexRadioDefault${i}">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault${i}" id="flexRadioDefault${i}3" value="${element.incorrect_answers[2]}">
                                 <label class="form-check-label" for="flexRadioDefault${i}">
                                 ${element.incorrect_answers[2]}
                                 </label>
                             </div>`;            
         }else {
-            answerCorrert = `<div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault${i}" id="flexRadioDefault${i}">
+            answerBody = `<div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault${i}" id="flexRadioDefault${i}0" value="${element.correct_answer}">
                                 <label class="form-check-label" for="flexRadioDefault${i}">
                                 ${element.correct_answer}
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault${i}" id="flexRadioDefault${i}">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault${i}1" id="flexRadioDefault${i}1" value="${element.incorrect_answers[0]}">
                                 <label class="form-check-label" for="flexRadioDefault${i}">
                                 ${element.incorrect_answers[0]}
+                                </label>
+                            </div>
+                            <div class="form-check" hidden>
+                                <input class="form-check-input" type="radio" name="flexRadioDefault${i}1" id="flexRadioDefault${i}2" value="FALSE">
+                                <label class="form-check-label" for="flexRadioDefault${i}">
+                                
+                                </label>
+                            </div>
+                            <div class="form-check" hidden>
+                                <input class="form-check-input" type="radio" name="flexRadioDefault${i}1" id="flexRadioDefault${i}3" value="FALSE">
+                                <label class="form-check-label" for="flexRadioDefault${i}">
+                                
                                 </label>
                             </div>`
         }
@@ -80,7 +96,7 @@ function printData(data) {
                             <p>
                                 ${element.question}
                             </p>
-                            ${answerCorrert}                            
+                            ${answerBody}                            
                         </div>
                     </div>
                 </div>`;
@@ -88,8 +104,7 @@ function printData(data) {
     });
     //poner los datos en HTML
     containerData.innerHTML = html;
-
-
+    containerBtn.innerHTML = `<button class="btn btn-primary mt-5 col-md-4" onclick="sendReply()">Enviar respuestas</button>`;
 }
 
 //===================================================================
@@ -118,3 +133,36 @@ function printCategories(data) {
 }
 
 getCategories();
+
+function answerCorrert(data){
+    // alert("Answers Correct OK");
+    let arrayAnswersCorrect = [];
+    data.forEach(element => arrayAnswersCorrect.push(element.correct_answer));
+    console.log(arrayAnswersCorrect);
+}
+
+function sendReply() {
+    // alert("envio de respuestas...");
+    let lista = document.getElementById("questions-container");
+    let arrayResponsesSent = [];
+    for(let i = 1; i <= lista.childNodes.length; i++) {
+        console.log("i: "+i);
+        if (document.getElementById("flexRadioDefault"+i+"0").checked)
+        {
+            arrayResponsesSent.push(document.getElementById("flexRadioDefault"+i+"0").value);            
+        }
+        if (document.getElementById("flexRadioDefault"+i+"1").checked)
+        {
+            arrayResponsesSent.push(document.getElementById("flexRadioDefault"+i+"1").value);
+        }
+        if (document.getElementById("flexRadioDefault"+i+"2").checked)
+        {
+            arrayResponsesSent.push(document.getElementById("flexRadioDefault"+i+"2").value);
+        }
+        if (document.getElementById("flexRadioDefault"+i+"3").checked)
+        {
+            arrayResponsesSent.push(document.getElementById("flexRadioDefault"+i+"3").value);
+        }
+    }
+    console.log(arrayResponsesSent);
+}
