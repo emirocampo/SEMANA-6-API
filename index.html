@@ -13,7 +13,7 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <form action="/validate" onsubmit="event.preventDefault(), getQuestions()">
+                        <form action="/validate" id="form-questions">
                             <!-- NÚMERO DE PREGUNTAS -->
                             <label for="totalQuestions">Total Questions</label>
                             <select  class="form-select"  id="totalQuestions">
@@ -55,13 +55,15 @@
         <!-- <button class="btn btn-primary mt-5" onclick="getQuestions()">Mostara preguntas</button> -->
         <!-- CONTENEDOR DE PREGUNTAS -->
         <div class="row" id="questions-container">
-            
+            <!-- EL CONTENEDOR DE PREGUNTAS DE SER UN FORMULARIO PARA VALIDAR
+            LOS CAMPOS -->
         </div>
         <!-- CONTENEDOR DEL BOTÓN ENVIAR RESPUESTAS -->
         <div class="row justify-content-center" id="btn-send-answers">
-            <!-- <button class="btn btn-primary mt-5 col-md-4" onclick="pClick()">Enviar respuestas</button>            -->
+            <!-- <button class="btn btn-primary mt-5 col-md-4" onclick="pClick()">Enviar respuestas</button> -->
+            <!-- ESTE BOTON DEBE IR DENTRO DEL FORMULARIO PARA HACER SUBMIT -->
         </div>
     </div>
-    <script src="js/api.js"></script>
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>
